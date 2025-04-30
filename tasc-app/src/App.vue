@@ -19,36 +19,4 @@ main {
   margin: 1rem auto;
   font-family: cursive;
 }
-
-label {
-  line-height: 1.9rem;
-}
-
-input,
-textarea {
-  width: 100%;
-  padding: 5px;
-  outline: none;
-  margin: 0;
-}
-
-fieldset {
-  padding: 20px 40px;
-}
-
-.button-container {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.btn {
-  margin-top: 20px;
-  width: 200px;
-  height: auto;
-}
-
-.ok {
-  margin-top: 20px;
-  background-color: red;
-}
 </style>
