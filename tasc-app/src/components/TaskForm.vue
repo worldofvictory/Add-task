@@ -4,7 +4,9 @@ const newTask = ref("");
 const emit = defineEmits<{addTask: [newTask:string]}> ();
 
 function formSubmitted() {
-    console.log(newTask.value)
+    if (newTask.value.trim()) {}
+    emit ('addTask', newTask.value)
+    newTask.value="" //pulisco input dopo l'inserimento
 }
 </script>
 <template>
