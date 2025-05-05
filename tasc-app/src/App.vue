@@ -1,10 +1,34 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import TaskForm from './components/TaskForm.vue';
-const tasks = ref <string[]>([]);
+import type { Task } from './type.ts';
+import TaskList from './components/TaskList.vue';
+const tasks = ref <Task[]>([]);
 const message = ref("Tasks App");
-function handleAddTask(yourTask:string) {
-tasks.value.push(yourTask)
+const totalDone = computed(() => tasks
+.value
+.reduce((total, task)=> task.done ? total+1: total, 0));
+
+function handleAddTask(yourTask:string) {   //perchè ho dato al typo tasks questi valori
+tasks.value.push({
+  id: crypto.randomUUID(),
+  title: yourTask,
+  done:false
+})
+}
+
+function toggleDone(id:string) {
+  const task = tasks.value.find((task)=> task.id ===id);
+if (task) {
+  task.done = !task.done;
+}
+}
+
+function deleteTask (id:string){
+  const index = tasks.value.findIndex((task)=> task.id ===id);
+  if (index !== -1) {
+    tasks.value.splice(index,1);
+  }
 }
 </script>
 
@@ -12,9 +36,11 @@ tasks.value.push(yourTask)
   <main>
     <h1>{{ message }}</h1>
     <TaskForm @addTask="handleAddTask"/>
-    <ul>
-      <li v-for = "(task,index) in tasks" :key="index">  {{ task }}</li>
-    </ul>
+    <h3 v-if="!tasks.length">Add a task to get started.</h3>
+    <h3 v-else> {{ totalDone }} /{{ tasks.length }} tasks completed</h3>
+    <TaskList :tasks @toggleDone="toggleDone" @removeTask="deleteTask"/>
+    <!--<h3>There are {{ tasks.length }}</h3>-->
+
   </main>
 </template>
 
