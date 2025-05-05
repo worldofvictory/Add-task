@@ -9,17 +9,17 @@ const emits = defineEmits<{
 }>();
 </script>
 <template>
-    <div class="task-list">
-        <TransitionGroup name="list" tag="ul">
-                <li v-for="task in props.tasks" :key="task.id" class="task">
-                    <label>
-                        <input @input="emits('toggleDone', task.id)" :checked="task.done" type="checkbox" />
-                        <span :class="{ done: task.done }">{{ task.title }} </span>
-                    </label>
-                    <button @click="emits('removeTask', task.id)" class="outline">Remove</button>
-                </li>
-        </TransitionGroup>
-    </div>
+    <TransitionGroup name="list" tag="div" class="task-list">
+        
+        <li v-for="task in props.tasks" :key="task.id" class="task">
+            <label>
+                <input @input="emits('toggleDone', task.id)" :checked="task.done" type="checkbox" />
+                <span :class="{ done: task.done }">{{ task.title }} </span>
+            </label>
+            <button @click="emits('removeTask', task.id)" class="outline">Remove</button>
+        </li>
+    
+    </TransitionGroup>
 </template>
 
 <style>
@@ -38,7 +38,7 @@ const emits = defineEmits<{
 }
 
 .outline {
-    margin-top: 1 rem;
+    margin-top: 1rem;
 
 }
 
@@ -50,6 +50,6 @@ const emits = defineEmits<{
 .list-enter-from,
 .list-leave-to {
     opacity: 0;
-    transform: translateX(30px);
+    transform: translateX(300px);
 }
 </style>
