@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
 import TaskForm from './components/TaskForm.vue';
-import type { Task } from './type.ts';
-import type { Filter } from './type.ts';
 import TaskList from './components/TaskList.vue';
 import FilterBtn from './components/FilterBtn.vue';
+import type { Task } from './type.ts';
+import type { Filter } from './type.ts';
 const tasks = ref<Task[]>([]);
 const message = ref("Tasks App");
 const filter = ref<Filter>("all");
